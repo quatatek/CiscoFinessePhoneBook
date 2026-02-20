@@ -27,10 +27,10 @@ To maintain data integrity, this gadget should **only be deployed to Supervisor 
 
 1.  **Create Finesse Administrator Account:** Create account in CUCM, assign the administrator's privilege in UCCX..
 2.  **Modify Credentials:** Update `PhoneBook.js` with your dedicated service account details.
-3.  **Upload Files:** Place `PhoneBook.xml`, `PhoneBook.js`, and `PhoneBook.css` on your Finesse 3rdpartygadget location .
+3.  **Upload Files:** Login to UCCX (both server) using 3rdparty gadget account. Create a folder in 3rdpartygadget/files. Place `PhoneBook.xml`, `PhoneBook.js`, and `PhoneBook.css` in the newly created location .
 4.  **Layout Configuration:** Add the gadget URL to the desired Supervisor/Team XML layout:
     ```xml
-    <gadget>https://<finesse-fqdn>/3rdpartygadget/files/PhoneBook.xml</gadget>
+    <gadget>https://<finesse-fqdn>/3rdpartygadget/files/<Phone Book Directory>/PhoneBook.xml</gadget>
     ```
 
 ## 📄 License
