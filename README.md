@@ -13,7 +13,7 @@ A modern, responsive Phone Book management gadget for Cisco Finesse. This tool a
 ## 🛡️ Security Considerations (Action Required)
 
 ### ⚠️ Hardcoded Administrator Credentials
-The current implementation of this gadget utilizes **hardcoded Basic Authentication** within the JavaScript file to interact with the Finesse API.
+Cisco Finesse does not allow Phonebook update without Finsesse administrator privilege. The current implementation of this gadget utilizes **hardcoded Basic Authentication** within the JavaScript file to interact with the Finesse API.
 
 * **Security Risk:** Because the credentials reside in `PhoneBook.js`, they are technically visible to anyone with access to the browser's developer tools.
 * **Best Practice - Dedicated Admin:** It is strongly recommended to create a **separate, dedicated administrator user** (e.g., `peo_phonebook`) specifically for this gadget.
@@ -85,6 +85,8 @@ Delete
 <img width="940" height="290" alt="image" src="https://github.com/user-attachments/assets/9748e526-a63e-4b8e-8144-e2f8a92d378e" />
 
 
+### Contact
+info@quatatek.com.au
 
 
 
