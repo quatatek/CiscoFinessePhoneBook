@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs title="Quata TEK Phonebook"
+                 description="Phone book gadget with add/edit/delete"
+                 thumbnail="http://localhost:8082/">
+
+        <Require feature="settitle" />
+        <Require feature="dynamic-height" />
+        <Require feature="pubsub-2" />
+        <Require feature="setprefs" />
+        <Require feature="loadingindicator">
+            <Param name="manual-dismiss">false</Param>
+            <Param name="loading-timeout">10</Param>
+        </Require>
+    </ModulePrefs>
+
+    <Content type="html">
+        <![CDATA[
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <link rel="stylesheet" href="PhoneBook.css" type="text/css" />
+            <script type="text/javascript" src="/desktop/assets/js/jquery.min.js"></script>
+            <script type="text/javascript" src="/desktop/assets/js/finesse.js"></script>
+            <script type="text/javascript" src="PhoneBook.js"></script>
+        </head>
+        <body class="claro">
+            <div id="phonebook-gadget">
+                <fieldset class="outline">
+                    <legend>Phonebook Management</legend>
+
+                    <!-- Toolbar - modern styling -->
+                    <div class="pb-toolbar">
+                        <label for="pb-select"><b>Phone Book:</b></label>
+                        <select id="pb-select"></select>
+
+                        <button id="pb-refresh-btn" type="button" class="pb-button pb-button-secondary" title="Refresh contacts">
+                            <span class="pb-icon">↻</span> Refresh
+                        </button> 
+                        <button id="pb-add-btn" type="button" class="pb-button pb-button-primary" title="Add new contact">
+                            <span class="pb-icon">+</span> Add Contact
+                        </button>
+                        <button id="pb-delete-selected-btn" type="button" class="pb-button pb-button-danger" disabled title="Delete selected contacts">
+                            <span class="pb-icon">×</span> Delete Selected
+                        </button>
+
+                        <span id="pb-status" class="pb-status"></span>
+                    </div>
+
+                    <!-- Search container - modern styling -->
+                    <div class="pb-search-container">
+                        <input type="text" id="pb-search-input" class="pb-search-input" 
+                               placeholder="Search by name, number, or description..." 
+                               title="Search in all contact fields" />
+                        <button id="pb-search-clear" class="pb-search-clear" title="Clear search">×</button>
+                        <span id="pb-search-status" class="pb-search-status"></span>
+                    </div>
+
+                    <!-- Scrollable table area -->
+                    <div class="pb-table-area">
+                        <div class="pb-table-container">
+                            <table id="pb-table" class="pb-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:40px;">
+                                            <input type="checkbox" id="pb-select-all" title="Select all contacts" />
+                                        </th>
+                                        <th>Contact Name</th>
+                                        <th>Phone Number</th>
+                                        <th>Description</th>
+                                        <th style="width:100px;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pb-tbody">
+                                    <!-- Contacts will be populated here -->
+                                </tbody>
+                            </table>
+
+                            <div id="pb-empty" class="pb-empty" style="display:none;">
+                                No contacts in this phone book.
+                            </div>
+                            
+                            <div id="pb-no-results" class="pb-no-results" style="display:none;">
+                                No contacts match your search criteria.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form/Modal section - modern styling -->
+                    <div id="pb-contact-modal">
+                        <div class="pb-modal-content">
+                            <h3 id="pb-modal-title">Add Contact</h3>
+
+                            <div class="pb-modal-row">
+                                <label for="pb-modal-firstName">First Name</label>
+                                <input id="pb-modal-firstName" type="text" />
+                            </div>
+
+                            <div class="pb-modal-row">
+                                <label for="pb-modal-lastName">Last Name</label>
+                                <input id="pb-modal-lastName" type="text" />
+                            </div>
+
+                            <div class="pb-modal-row">
+                                <label for="pb-modal-phoneNumber">
+                                    Phone Number<span class="pb-required">*</span>
+                                </label>
+                                <input id="pb-modal-phoneNumber" type="text" placeholder="e.g., 0 02 1234 5678" />
+                            </div>
+
+                            <div class="pb-modal-row">
+                                <label for="pb-modal-description">Description</label>
+                                <input id="pb-modal-description" type="text" placeholder="Description" />
+                            </div>
+
+                            <div class="pb-modal-actions">
+                                <button id="pb-save-btn" type="button" class="pb-button pb-button-success">
+                                    <span class="pb-icon">✓</span> Save
+                                </button>
+                                <button id="pb-cancel-btn" type="button" class="pb-button pb-button-secondary">
+                                    <span class="pb-icon">←</span> Cancel
+                                </button>
+                            </div>
+
+                            <div id="pb-modal-error" class="pb-error" style="display:none;"></div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <script type="text/javascript">
+                gadgets.HubSettings.onConnect = function () {
+                    finesse.modules.PhoneBookGadget.init();
+                };
+            </script>
+        </body>
+        </html>
+        ]]>
+    </Content>
+</Module>
